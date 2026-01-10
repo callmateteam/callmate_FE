@@ -1,6 +1,7 @@
 "use client";
 
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
 
 type ButtonVariant = "secondary" | "outlined" | "primary" | "text";
 type ButtonSize = "sm" | "md";
@@ -12,6 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   fullWidth?: boolean;
+  href?: string;
 }
 
 const ButtonVariants: Record<ButtonVariant, string> = {
@@ -20,6 +22,14 @@ const ButtonVariants: Record<ButtonVariant, string> = {
   outlined:
     "bg-white border border-neutral-400 text-neutral-400 text-label-l enabled:hover:border-primary-500 enabled:hover:text-primary-500 disabled:bg-neutral-100 disabled:border-neutral-300 disabled:text-neutral-400 disabled:cursor-not-allowed",
   text: "text-neutral-400",
+};
+
+const LinkVariants: Record<ButtonVariant, string> = {
+  primary: "bg-primary-700 text-white hover:bg-primary-600 text-label-l",
+  secondary: "bg-accent-400 text-title-m text-white hover:bg-accent-50 hover:text-accent-400",
+  outlined:
+    "bg-white border border-neutral-400 text-neutral-400 text-label-l hover:border-primary-500 hover:text-primary-500",
+  text: "text-neutral-400 hover:text-primary-500",
 };
 
 const ButtonBaseStyles =
@@ -33,17 +43,32 @@ export default function Button({
   rightIcon,
   disabled = false,
   fullWidth = false,
+  href,
   ...rest
 }: ButtonProps) {
-  const buttonVariantStyles = ButtonVariants[variant];
+  const buttonVariantStyles = href ? LinkVariants[variant] : ButtonVariants[variant];
 
   const buttonCombinedClassName = [ButtonBaseStyles, buttonVariantStyles].filter(Boolean).join(" ");
 
-  return (
-    <button className={buttonCombinedClassName} disabled={disabled} {...rest}>
+  const content = (
+    <>
       {leftIcon && <span className="shrink-0">{leftIcon}</span>}
       <span>{children}</span>
       {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={buttonCombinedClassName}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button className={buttonCombinedClassName} disabled={disabled} {...rest}>
+      {content}
     </button>
   );
 }

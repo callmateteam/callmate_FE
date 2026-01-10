@@ -5,11 +5,12 @@ import how2 from "@/public/landingImgs/how2.png";
 export default function HowltWorksSection() {
   return (
     <section
+      aria-labelledby="how-it-works-title"
       className="bg-contain bg-center bg-no-repeat px-5 pt-10"
       style={{ backgroundImage: "url('/landingImgs/howbg.png')" }}
     >
       <div className="text-center">
-        <h2 className="md:text-display-l text-[28px] leading-8 font-bold text-neutral-800">
+        <h2 id="how-it-works-title" className="md:text-display-l text-[28px] leading-8 font-bold text-neutral-800">
           상담 데이터를 학습해
           <br className="block md:hidden" /> 계속 성장하는 AI
         </h2>
@@ -24,11 +25,13 @@ export default function HowltWorksSection() {
           title="실시간 통화 연동"
           desc="실시간 통화 연동으로 바로 대응할 수 있는 멘트를 제공합니다."
           image={how1}
+          imageAlt="실시간 통화 연동 기능을 보여주는 이미지"
         />
         <HowItWorkCard
           title="상담 데이터를 통한 지속 학습"
           desc="매일 수백 건의 통화 데이터를 학습하여 더 정확하고 유용한 답변을 제공합니다."
           image={how2}
+          imageAlt="AI가 상담 데이터를 학습하는 과정을 보여주는 이미지"
         />
       </div>
     </section>

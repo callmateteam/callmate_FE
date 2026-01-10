@@ -6,10 +6,10 @@ export default function HeroSection() {
       aria-labelledby="hero-title"
       className="flex flex-col items-center justify-center bg-linear-to-br from-[#F5FAFC] to-white py-10 text-center md:py-15"
     >
-      <h2 id="hero-title" className="text-title-s text-neutral-400 md:text-[32px]">
+      <p className="text-title-s text-neutral-400 md:text-[32px]">
         통화 기록을 상담 성과로 바꾸는 AI통화 보조 플랫폼
-      </h2>
-      <p className="text-display-m md:text-display-xl mt-3 mb-12 text-neutral-800">
+      </p>
+      <h1 id="hero-title" className="text-display-m md:text-display-xl mt-3 mb-12 text-neutral-800">
         기록하는 시간을 넘어,
         <br />
         <span
@@ -22,8 +22,10 @@ export default function HeroSection() {
         >
           고객과 소통에 집중하세요
         </span>
-      </p>
-      <Button variant="secondary">무료체험 시작하기</Button>
+      </h1>
+      <Button variant="secondary" href="/counselGuide">
+        무료체험 시작하기
+      </Button>
     </section>
   );
 }
