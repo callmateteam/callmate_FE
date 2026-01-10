@@ -1,0 +1,252 @@
+/* app/globals.css */
+@import "tailwindcss";
+
+/* =========================
+   Custom Theme Configuration
+   ========================= */
+@theme {
+  /* Font Family */
+  --font-sans: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-pretendard: "Pretendard", sans-serif;
+
+  /* =========================
+     Colors - Primary (Teal Blue)
+     ========================= */
+  --color-primary-50: #ecfeff;
+  --color-primary-100: #cffafe;
+  --color-primary-200: #a5f3fc;
+  --color-primary-300: #67e8f9;
+  --color-primary-400: #22d3ee;
+  --color-primary-500: #0891b2;
+  --color-primary-600: #0e7490;
+  --color-primary-700: #155e75;
+  --color-primary-800: #164e63;
+  --color-primary-900: #083344;
+
+  /* =========================
+     Colors - Secondary (Deep Teal)
+     ========================= */
+  --color-secondary-50: #f0fdfa;
+  --color-secondary-100: #ccfbf1;
+  --color-secondary-200: #99f6e4;
+  --color-secondary-300: #5eead4;
+  --color-secondary-400: #2dd4bf;
+  --color-secondary-500: #0fb2a3;
+  --color-secondary-600: #0d9488;
+  --color-secondary-700: #0f766e;
+  --color-secondary-800: #115e59;
+  --color-secondary-900: #134e4a;
+
+  /* =========================
+     Colors - Neutral (Gray)
+     ========================= */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+
+  /* =========================
+     Colors - Accent (Warm Coral)
+     ========================= */
+  --color-accent-50: #fff7ed;
+  --color-accent-100: #ffedd5;
+  --color-accent-200: #fed7aa;
+  --color-accent-300: #fdba74;
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+  --color-accent-800: #9a3412;
+  --color-accent-900: #7c2d12;
+
+  /* =========================
+     Colors - Success (Green)
+     ========================= */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  --color-success-text: #15803d;
+  --color-success-icon: #22c55e;
+  --color-success-container: #dcfce7;
+  --color-success-background: #f0fdf4;
+
+  /* =========================
+     Colors - Warning (Yellow/Orange)
+     ========================= */
+  --color-warning-50: #fff7ed;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #eab308;
+  --color-warning-600: #d97706;
+  --color-warning-700: #c15b1c;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-warning-text: #c15b1c;
+  --color-warning-icon: #eab308;
+  --color-warning-container: #fef3c7;
+  --color-warning-background: #fff7ed;
+
+  /* =========================
+     Colors - Error (Red)
+     ========================= */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+  --color-error-text: #b91c1c;
+  --color-error-icon: #ef4444;
+  --color-error-container: #fee2e2;
+  --color-error-background: #fef2f2;
+
+  /* =========================
+     Colors - Border
+     ========================= */
+  --color-border-text: #b91c1c;
+  --color-border-icon: #ef4444;
+  --color-border-container: #fee2e2;
+  --color-border-background: #fef2f2;
+}
+
+/* =========================
+   Custom Typography Utilities
+   ========================= */
+
+/* Display */
+@utility text-display-xl {
+  font-size: 3.75rem;
+  line-height: 5rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-display-l {
+  font-size: 2.5rem;
+  line-height: 3.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-display-m {
+  font-size: 2rem;
+  line-height: 2.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Headline */
+@utility text-headline-l {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.014em;
+}
+
+@utility text-headline-m {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* Title */
+@utility text-title-l {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@utility text-title-m {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@utility text-title-s {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Body */
+@utility text-body-l {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-body-m {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Label */
+@utility text-label-l {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-label-m {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+@utility text-label-s {
+  font-size: 0.6875rem;
+  line-height: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* =========================
+   Base Styles
+   ========================= */
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    @apply text-body-l text-neutral-900;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
