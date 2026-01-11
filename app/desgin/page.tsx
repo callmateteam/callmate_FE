@@ -4,6 +4,7 @@ import Button from "@/components/common/Button";
 import FeedbackCard from "@/components/common/FeedbackCard";
 import FileUploadInput from "@/components/common/FileUploadInput";
 import Logo from "@/components/common/Logo";
+import NumberBadge from "@/components/common/NumberBadge";
 import ProgressBar from "@/components/common/ProgressBar";
 import SegmentButton from "@/components/common/SegmentButton";
 import { Pen, Pencil } from "lucide-react";
@@ -67,8 +68,12 @@ export default function page() {
         onChange={setSelectedSegment}
       />
       {/* 로고 */}
-
       <Logo />
+      {/* 넘버 뱃지 */}
+      <div className="flex items-center gap-4">
+        <NumberBadge number={1} state="selected" />
+        <NumberBadge number={2} state="unselected" />
+      </div>
     </div>
   );
 }
