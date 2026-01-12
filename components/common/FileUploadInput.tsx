@@ -112,7 +112,7 @@ export default function FileUploadInput({
           <p className="text-body-m mt-1 text-neutral-400">{description}</p>
 
           {(errorText || error) && (
-            <p className="text-label-m text-error-text mt-1">{errorText || error}</p>
+            <p className="text-label-m mt-1 text-[#EF4444]">{errorText || error}</p>
           )}
         </div>
 
