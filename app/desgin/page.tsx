@@ -6,7 +6,10 @@ import FileUploadInput from "@/components/common/FileUploadInput";
 import Logo from "@/components/common/Logo";
 import NumberBadge from "@/components/common/NumberBadge";
 import ProgressBar from "@/components/common/ProgressBar";
+import ProgressIndicatorCard from "@/components/common/ProgressIndicatorCard";
+import SearchInput from "@/components/common/SearchInput";
 import SegmentButton from "@/components/common/SegmentButton";
+import SttBox from "@/components/common/SttBox";
 import { Pen, Pencil } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -74,6 +77,19 @@ export default function page() {
         <NumberBadge number={1} state="selected" />
         <NumberBadge number={2} state="unselected" />
       </div>
+
+      {/* 카드 모달 */}
+      <ProgressIndicatorCard></ProgressIndicatorCard>
+
+      {/* 서치 인풋 */}
+      <SearchInput />
+
+      {/* stt box */}
+      <SttBox
+        stt="client"
+        text="저기요, 지난달에 신청한 프리미엄 플랜인데요. 결제가 두 번 된 것 같아서요."
+      />
+      <SttBox stt="me" text="안녕하세요, 콜메이트 고객센터입니다. 무엇을 도와드릴까요?" />
     </div>
   );
 }
