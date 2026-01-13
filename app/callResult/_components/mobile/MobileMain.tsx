@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import ResultHeading from "../ResultHeading";
 import SegmentButton from "@/components/common/SegmentButton";
-import CallDetails from "./CallDetails";
+import CallDetailsContent from "../CallDetailsContent";
 import AiSummary from "./AiSummary";
+import type { SavedTranscription } from "@/lib/types/transcription";
 
-const selected = "option1";
+interface MobileMainProps {
+  transcription: SavedTranscription;
+}
 
-export default function MobileMain() {
-  const [selectedSegment, setSelectedSegment] = useState(selected);
+export default function MobileMain({ transcription }: MobileMainProps) {
+  const [selectedSegment, setSelectedSegment] = useState("option1");
+
   return (
     <div>
-      <ResultHeading name="테스트" totalTime="4분 35초" />
       <SegmentButton
         options={[
           { label: "통화 내용", value: "option1" },
@@ -21,7 +23,12 @@ export default function MobileMain() {
         value={selectedSegment}
         onChange={setSelectedSegment}
       />
-      {selectedSegment === selected ? <CallDetails /> : <AiSummary />}
+
+      {selectedSegment === "option1" ? (
+        <CallDetailsContent utterances={transcription.data.utterances} />
+      ) : (
+        <AiSummary transcription={transcription} />
+      )}
     </div>
   );
 }

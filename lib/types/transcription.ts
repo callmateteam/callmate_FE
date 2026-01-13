@@ -5,16 +5,19 @@
 // 발화 정보
 export interface Utterance {
   speaker: string;
-  start_time: number;
-  end_time: number;
+  start: number; // 밀리초
+  end: number; // 밀리초
   text: string;
+  confidence?: number; // 신뢰도
 }
 
 // 전사 결과 데이터
 export interface TranscriptionData {
-  transcript_id: string;
+  transcript_id?: string;
+  full_text?: string; // 전체 텍스트
   utterances: Utterance[];
-  duration_ms?: number;
+  speakers?: string[]; // 화자 목록
+  duration: number; // 밀리초
   language_code?: string;
 }
 
