@@ -2,7 +2,7 @@
 
 import SearchInput from "@/components/common/SearchInput";
 import SttBox from "@/components/common/SttBox";
-import React from "react";
+import { useState } from "react";
 
 const mockdata = [
   { speaker: "A", text: "여보세요?", start: 160, end: 659, confidence: 0.85009766 },
@@ -26,9 +26,11 @@ const mockdata = [
 ];
 
 export default function CallDetails() {
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   return (
     <div className="mt-5">
-      <SearchInput />
+      <SearchInput value={searchKeyword} onChange={setSearchKeyword} />
       <div className="mt-4 flex flex-col gap-2">
         {mockdata.map((mock, _idx) => (
           <SttBox key={_idx} stt={mock.speaker === "A" ? "me" : "client"} text={mock.text} />
