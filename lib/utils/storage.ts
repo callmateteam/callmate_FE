@@ -1,31 +1,29 @@
 /**
- * 전사 결과 로컬 저장 관리
+ * 전사 결과 로컬 저장 관리 (단일 항목)
  */
 
 import type { SavedTranscription, TranscriptionData } from "@/lib/types/transcription";
+import type { SavedScriptContext } from "@/lib/types/script";
 
-const STORAGE_KEY = "callmate_transcriptions";
-const MAX_STORED_ITEMS = 10; // 최대 저장 개수
+const STORAGE_KEY = "callmate_current_transcription";
+const SCRIPT_CONTEXT_KEY = "callmate_script_context";
 
 /**
- * 전사 결과 저장
+ * 전사 결과 저장 (기존 데이터 덮어쓰기)
  */
 export const saveTranscription = (
   filename: string,
   data: TranscriptionData
 ): SavedTranscription => {
   const savedItem: SavedTranscription = {
-    id: data.transcript_id,
+    id: data.transcript_id || `transcript_${Date.now()}`,
     filename,
     data,
     createdAt: new Date().toISOString(),
   };
 
   try {
-    const existing = getStoredTranscriptions();
-    const updated = [savedItem, ...existing].slice(0, MAX_STORED_ITEMS);
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedItem));
     return savedItem;
   } catch (error) {
     console.error("전사 결과 저장 실패:", error);
@@ -34,38 +32,27 @@ export const saveTranscription = (
 };
 
 /**
- * 저장된 전사 결과 목록 조회
+ * 현재 저장된 전사 결과 조회
  */
-export const getStoredTranscriptions = (): SavedTranscription[] => {
+export const getCurrentTranscription = (): SavedTranscription | null => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) return [];
+    if (!stored) return null;
 
-    const parsed = JSON.parse(stored) as SavedTranscription[];
+    const parsed = JSON.parse(stored) as SavedTranscription;
     return parsed;
   } catch (error) {
     console.error("전사 결과 로드 실패:", error);
-    return [];
+    return null;
   }
 };
 
 /**
- * 특정 전사 결과 조회
+ * 전사 결과 삭제
  */
-export const getTranscriptionById = (id: string): SavedTranscription | null => {
-  const stored = getStoredTranscriptions();
-  return stored.find((item) => item.id === id) || null;
-};
-
-/**
- * 특정 전사 결과 삭제
- */
-export const deleteTranscription = (id: string): boolean => {
+export const clearTranscription = (): boolean => {
   try {
-    const stored = getStoredTranscriptions();
-    const filtered = stored.filter((item) => item.id !== id);
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+    localStorage.removeItem(STORAGE_KEY);
     return true;
   } catch (error) {
     console.error("전사 결과 삭제 실패:", error);
@@ -74,40 +61,43 @@ export const deleteTranscription = (id: string): boolean => {
 };
 
 /**
- * 모든 전사 결과 삭제
+ * 스크립트 컨텍스트 저장 (기존 데이터 덮어쓰기)
  */
-export const clearAllTranscriptions = (): boolean => {
+export const saveScriptContext = (context: SavedScriptContext): boolean => {
   try {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.setItem(SCRIPT_CONTEXT_KEY, JSON.stringify(context));
     return true;
   } catch (error) {
-    console.error("전사 결과 전체 삭제 실패:", error);
+    console.error("스크립트 컨텍스트 저장 실패:", error);
     return false;
   }
 };
 
 /**
- * 오래된 전사 결과 자동 정리 (30일 이상)
+ * 스크립트 컨텍스트 조회
  */
-export const cleanupOldTranscriptions = (): number => {
-  const stored = getStoredTranscriptions();
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+export const getScriptContext = (): SavedScriptContext | null => {
+  try {
+    const stored = localStorage.getItem(SCRIPT_CONTEXT_KEY);
+    if (!stored) return null;
 
-  const filtered = stored.filter((item) => {
-    const createdDate = new Date(item.createdAt);
-    return createdDate > thirtyDaysAgo;
-  });
-
-  const removedCount = stored.length - filtered.length;
-
-  if (removedCount > 0) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
-    } catch (error) {
-      console.error("오래된 전사 결과 정리 실패:", error);
-    }
+    const parsed = JSON.parse(stored) as SavedScriptContext;
+    return parsed;
+  } catch (error) {
+    console.error("스크립트 컨텍스트 조회 실패:", error);
+    return null;
   }
+};
 
-  return removedCount;
+/**
+ * 스크립트 컨텍스트 삭제
+ */
+export const clearScriptContext = (): boolean => {
+  try {
+    localStorage.removeItem(SCRIPT_CONTEXT_KEY);
+    return true;
+  } catch (error) {
+    console.error("스크립트 컨텍스트 삭제 실패:", error);
+    return false;
+  }
 };

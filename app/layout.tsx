@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { organizationSchema, websiteSchema, softwareApplicationSchema } from "./schema";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -92,8 +93,10 @@ export default function RootLayout({
         />
       </head>
       <body className={pretendard.variable}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -1,5 +1,4 @@
 import { Phone } from "lucide-react";
-import React from "react";
 
 interface ResultHeadingProps {
   name: string;
