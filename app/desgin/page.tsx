@@ -84,7 +84,7 @@ export default function page() {
       <ProgressIndicatorCard></ProgressIndicatorCard> */}
 
       {/* 서치 인풋 */}
-      <SearchInput />
+      {/* <SearchInput /> */}
 
       {/* stt box */}
       <SttBox
