@@ -3,8 +3,10 @@
  */
 
 import type { SavedTranscription, TranscriptionData } from "@/lib/types/transcription";
+import type { SavedScriptContext } from "@/lib/types/script";
 
 const STORAGE_KEY = "callmate_current_transcription";
+const SCRIPT_CONTEXT_KEY = "callmate_script_context";
 
 /**
  * 전사 결과 저장 (기존 데이터 덮어쓰기)
@@ -54,6 +56,48 @@ export const clearTranscription = (): boolean => {
     return true;
   } catch (error) {
     console.error("전사 결과 삭제 실패:", error);
+    return false;
+  }
+};
+
+/**
+ * 스크립트 컨텍스트 저장 (기존 데이터 덮어쓰기)
+ */
+export const saveScriptContext = (context: SavedScriptContext): boolean => {
+  try {
+    localStorage.setItem(SCRIPT_CONTEXT_KEY, JSON.stringify(context));
+    return true;
+  } catch (error) {
+    console.error("스크립트 컨텍스트 저장 실패:", error);
+    return false;
+  }
+};
+
+/**
+ * 스크립트 컨텍스트 조회
+ */
+export const getScriptContext = (): SavedScriptContext | null => {
+  try {
+    const stored = localStorage.getItem(SCRIPT_CONTEXT_KEY);
+    if (!stored) return null;
+
+    const parsed = JSON.parse(stored) as SavedScriptContext;
+    return parsed;
+  } catch (error) {
+    console.error("스크립트 컨텍스트 조회 실패:", error);
+    return null;
+  }
+};
+
+/**
+ * 스크립트 컨텍스트 삭제
+ */
+export const clearScriptContext = (): boolean => {
+  try {
+    localStorage.removeItem(SCRIPT_CONTEXT_KEY);
+    return true;
+  } catch (error) {
+    console.error("스크립트 컨텍스트 삭제 실패:", error);
     return false;
   }
 };

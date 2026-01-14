@@ -12,6 +12,7 @@ interface FileUploadInputProps {
   onFileSelect?: (files: File[]) => void;
   error?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function FileUploadInput({
@@ -23,6 +24,7 @@ export default function FileUploadInput({
   onFileSelect,
   error,
   className = "",
+  disabled = false,
 }: FileUploadInputProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [errorText, setErrorText] = useState(error || "");
@@ -87,6 +89,7 @@ export default function FileUploadInput({
   };
 
   const handleClick = () => {
+    if (disabled) return;
     fileInputRef.current?.click();
   };
 
@@ -94,14 +97,16 @@ export default function FileUploadInput({
     <div className={`w-full ${className}`}>
       <div
         onClick={handleClick}
-        onDragEnter={handleDragEnter}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        className={`relative flex cursor-pointer flex-col items-center justify-center gap-6 rounded-lg border-2 border-dashed px-12 py-18 transition-all duration-200 ${
-          isDragging
-            ? "border-secondary-600 bg-neutral-100"
-            : "border-neutral-300 bg-white hover:bg-neutral-100"
+        onDragEnter={disabled ? undefined : handleDragEnter}
+        onDragOver={disabled ? undefined : handleDragOver}
+        onDragLeave={disabled ? undefined : handleDragLeave}
+        onDrop={disabled ? undefined : handleDrop}
+        className={`relative flex flex-col items-center justify-center gap-6 rounded-lg border-2 border-dashed px-12 py-18 transition-all duration-200 ${
+          disabled
+            ? "cursor-not-allowed border-neutral-200 bg-neutral-50 opacity-60"
+            : isDragging
+            ? "cursor-pointer border-secondary-600 bg-neutral-100"
+            : "cursor-pointer border-neutral-300 bg-white hover:bg-neutral-100"
         } `}
       >
         <div className="bg-primary-50 flex h-15 w-15 items-center justify-center rounded-full">
@@ -122,6 +127,7 @@ export default function FileUploadInput({
           accept={accept}
           multiple={multiple}
           onChange={handleFileChange}
+          disabled={disabled}
           className="hidden"
         />
       </div>

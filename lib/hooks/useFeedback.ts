@@ -1,32 +1,32 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { requestAiSummary } from "@/lib/api/analysis";
+import { requestFeedback } from "@/lib/api/analysis";
 import { getScriptContext } from "@/lib/utils/storage";
 import type { Utterance } from "@/lib/types/transcription";
-import type { SummaryResponse } from "@/lib/types/analysis";
+import type { FeedbackResponse } from "@/lib/types/analysis";
 
-interface UseAiSummaryParams {
+interface UseFeedbackParams {
   utterances: Utterance[];
   speakers: string[];
   mySpeaker?: string; // 상담원 화자 ID (기본 "A")
 }
 
 /**
- * AI 요약을 가져오는 훅 (React Query 버전)
+ * 응대 피드백을 가져오는 훅 (React Query 버전)
  */
-export const useAiSummary = ({
+export const useFeedback = ({
   utterances,
   speakers,
   mySpeaker = "A",
-}: UseAiSummaryParams) => {
-  return useQuery<SummaryResponse, Error>({
-    queryKey: ["aiSummary", utterances, speakers, mySpeaker],
+}: UseFeedbackParams) => {
+  return useQuery<FeedbackResponse, Error>({
+    queryKey: ["feedback", utterances, speakers, mySpeaker],
     queryFn: () => {
       // localStorage에서 스크립트 컨텍스트 조회
       const scriptContext = getScriptContext();
 
-      return requestAiSummary({
+      return requestFeedback({
         utterances,
         speakers,
         my_speaker: mySpeaker,

@@ -9,7 +9,7 @@ interface AiSummaryProps {
 }
 
 /**
- * 모바일 AI 요약 래퍼 컴포넌트
+ * 모바일 AI 요약 래퍼 컴포넌트 (AI 분석 + 응대 피드백)
  */
 export default function AiSummary({ transcription }: AiSummaryProps) {
   return (

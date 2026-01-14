@@ -26,10 +26,34 @@ export interface SummaryResponse {
   customer_state: CustomerState;
 }
 
-// 응대 피드백 아이템 (향후 확장용)
+// 피드백 타입
+export type FeedbackType =
+  | "loss_emphasis" // 손실 강조
+  | "gain_emphasis" // 이득 강조
+  | "social_proof" // 사회적 증거
+  | "scarcity" // 희소성
+  | "reciprocity" // 상호성
+  | "authority"; // 권위
+
+// 피드백 아이템
 export interface FeedbackItem {
-  category?: string;
+  type: FeedbackType;
   title: string;
-  subtext: string;
-  recommend?: boolean;
+  content: string;
+}
+
+// 피드백 요청 (summary와 동일한 구조)
+export interface FeedbackRequest {
+  utterances: Utterance[];
+  speakers: string[];
+  my_speaker: string; // 상담원 화자 ID
+  script_context?: string; // 스크립트 컨텍스트
+  consultation_type: ConsultationType;
+}
+
+// 피드백 응답
+export interface FeedbackResponse {
+  transcript_id: string;
+  consultation_type: string;
+  feedbacks: FeedbackItem[]; // 3개의 추천 멘트
 }
