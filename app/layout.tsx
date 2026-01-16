@@ -22,18 +22,20 @@ export const metadata: Metadata = {
     "고객 상담",
     "통화 분석",
     "CallMate",
+    "callmate",
+    "콜메이트",
   ],
   authors: [{ name: "CallMate Team" }],
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://callmate.ai", // 수정필요
+    url: "https://callmate-fe.vercel.app",
     siteName: "CallMate",
     title: "CallMate - AI 통화 보조 플랫폼",
     description: "AI가 통화를 실시간으로 분석하고 상담 기록을 자동으로 작성합니다.",
     images: [
       {
-        url: "/og-image.png", // 수정필요
+        url: "/landingImgs/callmate-img.PNG",
         width: 1200,
         height: 630,
         alt: "CallMate AI 통화 보조 플랫폼",
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CallMate - AI 통화 보조 플랫폼",
     description: "AI가 통화를 실시간으로 분석하고 상담 기록을 자동으로 작성합니다.",
-    images: ["/twitter-image.png"], // 수정필요
+    images: ["/landingImgs/callmate-img.PNG"],
   },
   robots: {
     index: true,
