@@ -95,7 +95,7 @@ export default function Step3BSales({
         activeSection={activeSection}
         sectionIndex={2}
         tag="[ 판매/유지/설득 ]"
-        label="5. 비교 설명이 필요한 경우, 어떤 관점에서 설명하나요? *(복수선택)"
+        label="5. 비교 설명이 필요한 경우, 어떤 관점에서 설명하나요? *"
         options={pricingScopeOptions}
         selectedIds={selectedPricingScope}
         onChange={onPricingScopeChange}
@@ -107,7 +107,7 @@ export default function Step3BSales({
         activeSection={activeSection}
         sectionIndex={3}
         tag="[ 판매/유지/설득 ]"
-        label="6. 설득 과정에서 자주 나오는 반응을 선택해주세요. *(복수선택)"
+        label="6. 설득 과정에서 자주 나오는 반응을 선택해주세요. *"
         options={comparisonPointsOptions}
         selectedIds={selectedComparisonPoints}
         onChange={onComparisonPointsChange}
