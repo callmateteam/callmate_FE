@@ -5,8 +5,8 @@ export const organizationSchema: WithContext<Organization> = {
   "@type": "Organization",
   name: "CallMate",
   description: "AI 통화 보조 플랫폼",
-  url: "https://callmate.ai", // 수정필요
-  logo: "https://callmate.ai/logo.png", // 수정필요
+  url: "https://callmate-fe.vercel.app",
+  logo: "https://jbinyim12.cafe24.com/callmate-img.PNG",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Customer Service",
@@ -18,7 +18,7 @@ export const websiteSchema: WithContext<WebSite> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "CallMate",
-  url: "https://callmate.ai", // 수정필요
+  url: "https://callmate-fe.vercel.app",
   description: "AI가 통화를 실시간으로 분석하고 상담 기록을 자동으로 작성합니다.",
   inLanguage: "ko-KR",
 };
