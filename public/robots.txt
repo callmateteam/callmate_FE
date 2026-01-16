@@ -1,6 +1,4 @@
-# *
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://callmate.ai/sitemap.xml
+Sitemap: https://callmate-fe.vercel.app/sitemap.xml
