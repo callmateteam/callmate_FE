@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import FileUploadInput from "@/components/common/FileUploadInput";
 import PageHeading from "../_components/PageHeading";
 import Button from "@/components/common/Button";
@@ -8,14 +9,34 @@ import Modal from "@/components/common/Modal";
 import SurveyModalContent from "./_components/SurveyModalContent";
 import { Pencil, Check } from "lucide-react";
 import { useScriptUpload } from "@/lib/hooks/useScriptUpload";
+import { useScriptFormSubmit } from "@/lib/hooks/useScriptFormSubmit";
+import Link from "next/link";
+import type { ScriptFormRequest } from "@/lib/types/script";
 
 export default function CounselGuide() {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const { mutate: uploadScript, isPending } = useScriptUpload({
     onSuccess: () => {
       setUploadSuccess(true);
+      setTimeout(() => {
+        router.push("/callAnalytics");
+      }, 1000);
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+
+  const { mutate: submitForm, isPending: isFormSubmitting } = useScriptFormSubmit({
+    onSuccess: () => {
+      setUploadSuccess(true);
+      setIsModalOpen(false);
+      setTimeout(() => {
+        router.push("/callAnalytics");
+      }, 1000);
     },
     onError: (error) => {
       alert(error.message);
@@ -27,6 +48,10 @@ export default function CounselGuide() {
     const file = files[0]; // 첫 번째 파일만 사용
     setUploadSuccess(false);
     uploadScript({ file });
+  };
+
+  const handleFormSubmit = (data: ScriptFormRequest) => {
+    submitForm(data);
   };
 
   return (
@@ -65,10 +90,16 @@ export default function CounselGuide() {
         {isPending && (
           <div className="flex items-center justify-center py-10">
             <div className="flex flex-col items-center gap-3">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent-400 border-t-transparent" />
-              <p className="text-body-l text-neutral-400">
-                PDF에서 스크립트를 추출하는 중...
-              </p>
+              <div className="border-accent-400 h-10 w-10 animate-spin rounded-full border-4 border-t-transparent" />
+              <p className="text-body-l text-neutral-400">PDF에서 스크립트를 추출하는 중...</p>
+            </div>
+          </div>
+        )}
+        {isFormSubmitting && (
+          <div className="flex items-center justify-center py-10">
+            <div className="flex flex-col items-center gap-3">
+              <div className="border-accent-400 h-10 w-10 animate-spin rounded-full border-4 border-t-transparent" />
+              <p className="text-body-l text-neutral-400">가이드를 등록하는 중...</p>
             </div>
           </div>
         )}
@@ -88,13 +119,14 @@ export default function CounselGuide() {
           직접 작성하기
         </Button>
       </div>
+      <div className="mt-14 flex items-center justify-end md:mt-42.5">
+        <Link href="/callAnalytics" className="text-primary-500">
+          나중에 등록
+        </Link>
+      </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="상담 가이드 작성"
-      >
-        <SurveyModalContent onClose={() => setIsModalOpen(false)} />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="상담 가이드 작성">
+        <SurveyModalContent onClose={() => setIsModalOpen(false)} onSubmit={handleFormSubmit} />
       </Modal>
     </article>
   );

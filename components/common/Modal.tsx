@@ -1,7 +1,14 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import ProgressBar from "./ProgressBar";
+import NumberBadge from "./NumberBadge";
+
+const tocSteps = [
+  { number: 1, label: "기본 정보 입력" },
+  { number: 2, label: "대화 목적 선택" },
+  { number: 3, label: "대화 기준 설정" },
+  { number: 4, label: "톤&멘트 설정(선택)" },
+];
 
 interface ModalProps {
   isOpen: boolean;
@@ -43,14 +50,33 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div
-          className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-xl"
+          className="relative mx-5 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-xl"
           role="dialog"
           aria-modal="true"
           aria-labelledby={title ? "modal-title" : undefined}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
-          <ProgressBar percentage={10} height="12px" />
+          {/* 목차 */}
+          <div className="flex items-center justify-between px-10 pt-10 md:gap-4">
+            {tocSteps.map((step, index) => {
+              const isSelected = index === 0;
+              return (
+                <div key={step.number} className="flex items-center gap-2 md:gap-3">
+                  <NumberBadge
+                    number={step.number}
+                    state={isSelected ? "selected" : "unselected"}
+                  />
+                  <span
+                    className={`text-title-s whitespace-nowrap ${
+                      isSelected ? "text-neutral-900" : "text-neutral-400"
+                    } ${isSelected ? "inline" : "hidden"} md:inline`}
+                  >
+                    {step.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
           {/* Content */}
           <div className="px-10 pt-18 pb-8">{children}</div>
         </div>

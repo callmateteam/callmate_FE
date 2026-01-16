@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import AiSummaryContent from "../AiSummaryContent";
 import type { SavedTranscription } from "@/lib/types/transcription";
 
