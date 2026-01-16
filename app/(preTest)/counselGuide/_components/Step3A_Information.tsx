@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import SurveyStepSection from "@/components/common/SurveyStepSection";
 
 interface Step3AInformationProps {
   selectedTypes: string[];
@@ -9,6 +9,7 @@ interface Step3AInformationProps {
   onTypesChange: (value: string[]) => void;
   onKeyPointsChange: (value: string[]) => void;
   onFaqTypesChange: (value: string[]) => void;
+  activeSection: number;
 }
 
 const targetTypeOptions = [
@@ -20,9 +21,9 @@ const targetTypeOptions = [
 ];
 
 const keyPointOptions = [
-  { id: "features", label: "주요 기능 또는 구성" },
+  { id: "features", label: "주요 기능 / 구성" },
   { id: "usage", label: "사용 방법 / 절차" },
-  { id: "benefits", label: "장점 또는 기대 효과" },
+  { id: "benefits", label: "장점 / 기대 효과" },
   { id: "cost", label: "비용 / 조건 / 이용 범위" },
   { id: "limitations", label: "제한 사항 / 유의 사항" },
   { id: "trust", label: "신뢰 근거 (기준, 수치, 사례)" },
@@ -46,99 +47,45 @@ export default function Step3AInformation({
   onTypesChange,
   onKeyPointsChange,
   onFaqTypesChange,
+  activeSection,
 }: Step3AInformationProps) {
-  const toggleSelection = (
-    id: string,
-    currentList: string[],
-    onChange: (value: string[]) => void,
-    maxCount?: number
-  ) => {
-    if (currentList.includes(id)) {
-      onChange(currentList.filter((item) => item !== id));
-    } else {
-      if (maxCount && currentList.length >= maxCount) {
-        alert(`최대 ${maxCount}개까지만 선택할 수 있습니다.`);
-        return;
-      }
-      onChange([...currentList, id]);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-8">
-      <h3 className="text-title-l text-neutral-900">3. 대화 기준 설정</h3>
-
-      {/* 3-A-1. 안내 대상 유형 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-A-1. 안내 대상 유형</label>
-          <p className="text-body-s text-neutral-500">안내하는 대상의 유형을 선택해주세요. (복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {targetTypeOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedTypes.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedTypes, onTypesChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      {/* 3. 안내 대상 유형 */}
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={0}
+        tag="[안내/정보 제공]"
+        label="3. 안내하는 대상의 유형을 선택해주세요."
+        options={targetTypeOptions}
+        selectedIds={selectedTypes}
+        onChange={onTypesChange}
+        name="consulting-target-type"
+      />
 
       {/* 3-A-2. 주요 특장점 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-A-2. 주요 특장점 (최대 5개)</label>
-          <p className="text-body-s text-neutral-500">안내 시 반드시 전달되어야 하는 요소를 선택해주세요.</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {keyPointOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedKeyPoints.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedKeyPoints, onKeyPointsChange, 5)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={1}
+        tag="[안내/정보 제공]"
+        label="4. 안내 시 반드시 전달되어야 하는 요소를 선택해주세요. *"
+        options={keyPointOptions}
+        selectedIds={selectedKeyPoints}
+        onChange={onKeyPointsChange}
+        name="consulting-key-points"
+      />
 
       {/* 3-A-3. 자주 묻는 질문 유형 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-A-3. 자주 묻는 질문 유형 (FAQ)</label>
-          <p className="text-body-s text-neutral-500">안내 중 자주 등장하는 질문 유형을 선택해주세요. (복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {faqTypeOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedFaqTypes.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedFaqTypes, onFaqTypesChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={2}
+        tag="[안내/정보 제공]"
+        label="5. 안내 중 자주 등장하는 질문 유형을 선택해주세요. *"
+        options={faqTypeOptions}
+        selectedIds={selectedFaqTypes}
+        onChange={onFaqTypesChange}
+        name="consulting-faq-types"
+      />
     </div>
   );
 }

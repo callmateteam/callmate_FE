@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import FileUploadInput from "@/components/common/FileUploadInput";
 import PageHeading from "../_components/PageHeading";
 import Button from "@/components/common/Button";
-import Modal from "@/components/common/Modal";
-import SurveyModalContent from "./_components/SurveyModalContent";
+import CounselGuideSurveyModal from "@/components/common/CounselGuideSurveyModal";
 import { Pencil, Check } from "lucide-react";
 import { useScriptUpload } from "@/lib/hooks/useScriptUpload";
 import { useScriptFormSubmit } from "@/lib/hooks/useScriptFormSubmit";
@@ -125,9 +124,11 @@ export default function CounselGuide() {
         </Link>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="상담 가이드 작성">
-        <SurveyModalContent onClose={() => setIsModalOpen(false)} onSubmit={handleFormSubmit} />
-      </Modal>
+      <CounselGuideSurveyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleFormSubmit}
+      />
     </article>
   );
 }

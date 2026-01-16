@@ -1,5 +1,7 @@
 "use client";
 
+import SurveyStepSection from "@/components/common/SurveyStepSection";
+
 interface Step3CSupportProps {
   selectedProblemTypes: string[];
   selectedResolutionSteps: string[];
@@ -9,6 +11,7 @@ interface Step3CSupportProps {
   onResolutionStepsChange: (value: string[]) => void;
   onCompensationScopeChange: (value: string[]) => void;
   onEscalationCriteriaChange: (value: string[]) => void;
+  activeSection: number;
 }
 
 const problemTypeOptions = [
@@ -55,118 +58,57 @@ export default function Step3CSupport({
   onResolutionStepsChange,
   onCompensationScopeChange,
   onEscalationCriteriaChange,
+  activeSection,
 }: Step3CSupportProps) {
-  const toggleSelection = (
-    id: string,
-    currentList: string[],
-    onChange: (value: string[]) => void
-  ) => {
-    if (currentList.includes(id)) {
-      onChange(currentList.filter((item) => item !== id));
-    } else {
-      onChange([...currentList, id]);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-8">
-      <h3 className="text-title-l text-neutral-900">3. 대화 기준 설정</h3>
-
       {/* 3-C-1. 자주 발생하는 문제 유형 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-C-1. 자주 발생하는 문제 유형</label>
-          <p className="text-body-s text-neutral-500">대화 중 자주 접수되는 문제 유형을 선택해주세요. (복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {problemTypeOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedProblemTypes.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedProblemTypes, onProblemTypesChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={0}
+        tag="[ 불만/문제 해결 ]"
+        label="3. 자주 접수되는 문제 유형을 선택해주세요. *"
+        options={problemTypeOptions}
+        selectedIds={selectedProblemTypes}
+        onChange={onProblemTypesChange}
+        name="support-problem-types"
+      />
 
       {/* 3-C-2. 기본 해결 절차 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-C-2. 기본 해결 절차</label>
-          <p className="text-body-s text-neutral-500">문제 대응 시 기본적으로 따르는 절차를 선택해주세요. (순서 무관, 복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {resolutionStepOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedResolutionSteps.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedResolutionSteps, onResolutionStepsChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={1}
+        tag="[ 불만/문제 해결 ]"
+        label="4. 문제 대응 시 기본적으로 따르는 절차를 선택해주세요. *"
+        options={resolutionStepOptions}
+        selectedIds={selectedResolutionSteps}
+        onChange={onResolutionStepsChange}
+        name="support-resolution-steps"
+      />
 
       {/* 3-C-3. 보상 / 대안 제시 가능 범위 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-C-3. 보상 / 대안 제시 가능 범위</label>
-          <p className="text-body-s text-neutral-500">제안 가능한 대응 범위를 선택해주세요. (복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {compensationScopeOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedCompensationScope.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedCompensationScope, onCompensationScopeChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={2}
+        tag="[ 불만/문제 해결 ]"
+        label="5. 제안 가능한 대응 범위를 선택해주세요.  *(복수선택)"
+        options={compensationScopeOptions}
+        selectedIds={selectedCompensationScope}
+        onChange={onCompensationScopeChange}
+        name="support-compensation-scope"
+      />
 
       {/* 3-C-4. 에스컬레이션 기준 */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-headline-m text-neutral-900">3-C-4. 에스컬레이션 기준</label>
-          <p className="text-body-s text-neutral-500">어떤 경우에 상위 담당자 또는 다른 채널로 연결하나요? (복수 선택)</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {escalationCriteriaOptions.map((option) => (
-            <label
-              key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 p-4 hover:bg-neutral-50"
-            >
-              <input
-                type="checkbox"
-                checked={selectedEscalationCriteria.includes(option.id)}
-                onChange={() => toggleSelection(option.id, selectedEscalationCriteria, onEscalationCriteriaChange)}
-                className="h-5 w-5 cursor-pointer"
-              />
-              <span className="text-body-m text-neutral-900">{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SurveyStepSection
+        activeSection={activeSection}
+        sectionIndex={3}
+        tag="[ 불만/문제 해결 ]"
+        label="6. 상위 담당자·다른 채널 연결 기준을 선택해주세요.  *(복수선택)"
+        options={escalationCriteriaOptions}
+        selectedIds={selectedEscalationCriteria}
+        onChange={onEscalationCriteriaChange}
+        name="support-escalation-criteria"
+      />
     </div>
   );
 }

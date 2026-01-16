@@ -5,7 +5,7 @@
 import type { Utterance } from "./transcription";
 
 // 상담 유형
-export type ConsultationType = "sales" | "cs" | "consulting";
+export type ConsultationType = "sales" | "complaint" | "information";
 
 // 고객 상태
 export type CustomerState = "관심 있음" | "고민 중" | "거부" | "보류" | "기타";

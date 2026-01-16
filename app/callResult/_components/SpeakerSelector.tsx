@@ -16,15 +16,13 @@ export default function SpeakerSelector({
 }: SpeakerSelectorProps) {
   return (
     <div className="flex items-center gap-3">
-      <label className="text-body-m text-neutral-700">
-        상담사 선택 (임시):
-      </label>
+      <label className="text-body-m text-neutral-700">상담사 :</label>
       <div className="flex gap-2">
         {speakers.map((speaker) => (
           <button
             key={speaker}
             onClick={() => onSpeakerChange(speaker)}
-            className={`rounded-lg px-4 py-2 text-body-m transition-colors ${
+            className={`text-body-m rounded-lg px-4 py-2 transition-colors ${
               selectedSpeaker === speaker
                 ? "bg-accent-400 text-white"
                 : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"

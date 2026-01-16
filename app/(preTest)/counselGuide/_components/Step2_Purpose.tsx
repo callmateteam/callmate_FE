@@ -10,7 +10,7 @@ interface Step2PurposeProps {
 
 const purposeOptions: SurveyOption[] = [
   {
-    id: "consulting",
+    id: "information",
     title: "안내 / 정보 제공",
     description: "제품·서비스 설명, 일반 문의 응대",
   },
@@ -20,7 +20,7 @@ const purposeOptions: SurveyOption[] = [
     description: "신규 가입 유도, 재계약, 업셀링, 해지 방어",
   },
   {
-    id: "cs",
+    id: "complaint",
     title: "불만 /  문제 해결",
     description: "클레임 처리, CS, 환불/AS 접수",
   },

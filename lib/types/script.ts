@@ -41,7 +41,7 @@ export interface ExtractedScript {
 // API 응답
 export interface ScriptExtractionResponse {
   success: boolean;
-  input_type: "pdf" | "text";
+  input_type: "pdf" | "text" | "form";
   extracted: ExtractedScript;
   prompt_context: string; // AI 분석에 사용될 컨텍스트
   metadata?: Record<string, unknown>;
@@ -68,6 +68,7 @@ export interface SalesDetails {
 
 // 정보 안내 상담 세부 정보
 export interface InformationDetails {
+  product_name?: string;
   common_inquiries: FaqItem[];
   department_info: string[];
   process_guides: string[];
@@ -75,6 +76,7 @@ export interface InformationDetails {
 
 // 지원 상담 세부 정보
 export interface SupportDetails {
+  product_name?: string;
   common_problems: string[];
   compensation_options: string[];
   escalation_criteria: string[];
