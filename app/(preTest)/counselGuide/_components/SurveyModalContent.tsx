@@ -14,9 +14,14 @@ import type { ToneStyle, ScriptFormRequest } from "@/lib/types/script";
 interface SurveyModalContentProps {
   onClose: () => void;
   onSubmit: (data: ScriptFormRequest) => void;
+  onStepChange?: (step: number) => void;
 }
 
-export default function SurveyModalContent({ onClose, onSubmit }: SurveyModalContentProps) {
+export default function SurveyModalContent({
+  onClose,
+  onSubmit,
+  onStepChange
+}: SurveyModalContentProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [step3Index, setStep3Index] = useState(0);
   const [step4Index, setStep4Index] = useState(0);
@@ -70,6 +75,11 @@ export default function SurveyModalContent({ onClose, onSubmit }: SurveyModalCon
       setStep4Index(0);
     }
   }, [currentStep]);
+
+  // currentStep이 변경될 때마다 부모 컴포넌트에 알림
+  useEffect(() => {
+    onStepChange?.(currentStep);
+  }, [currentStep, onStepChange]);
 
   const handleNext = () => {
     // 유효성 검사

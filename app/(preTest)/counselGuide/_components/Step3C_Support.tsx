@@ -91,7 +91,7 @@ export default function Step3CSupport({
         activeSection={activeSection}
         sectionIndex={2}
         tag="[ 불만/문제 해결 ]"
-        label="5. 제안 가능한 대응 범위를 선택해주세요.  *(복수선택)"
+        label="5. 제안 가능한 대응 범위를 선택해주세요.  *"
         options={compensationScopeOptions}
         selectedIds={selectedCompensationScope}
         onChange={onCompensationScopeChange}
@@ -103,7 +103,7 @@ export default function Step3CSupport({
         activeSection={activeSection}
         sectionIndex={3}
         tag="[ 불만/문제 해결 ]"
-        label="6. 상위 담당자·다른 채널 연결 기준을 선택해주세요.  *(복수선택)"
+        label="6. 상위 담당자·다른 채널 연결 기준을 선택해주세요.  *"
         options={escalationCriteriaOptions}
         selectedIds={selectedEscalationCriteria}
         onChange={onEscalationCriteriaChange}

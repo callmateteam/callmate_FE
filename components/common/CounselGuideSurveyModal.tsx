@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Modal from "@/components/common/Modal";
 import SurveyModalContent from "@/app/(preTest)/counselGuide/_components/SurveyModalContent";
 import type { ScriptFormRequest } from "@/lib/types/script";
@@ -15,9 +16,17 @@ export default function CounselGuideSurveyModal({
   onClose,
   onSubmit,
 }: CounselGuideSurveyModalProps) {
+  const [currentStep, setCurrentStep] = useState(1);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="상담 가이드 작성">
-      <SurveyModalContent onClose={onClose} onSubmit={onSubmit} />
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="상담 가이드 작성"
+      currentStep={currentStep}
+      totalSteps={4}
+    >
+      <SurveyModalContent onClose={onClose} onSubmit={onSubmit} onStepChange={setCurrentStep} />
     </Modal>
   );
 }

@@ -15,9 +15,18 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   title?: string;
+  currentStep?: number;
+  totalSteps?: number;
 }
 
-export default function Modal({ isOpen, onClose, children, title }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  title,
+  currentStep = 1,
+  totalSteps = 4,
+}: ModalProps) {
   // ESC 키로 모달 닫기
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -59,7 +68,8 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
           {/* 목차 */}
           <div className="flex items-center justify-between px-10 pt-10 md:gap-4">
             {tocSteps.map((step, index) => {
-              const isSelected = index === 0;
+              const stepNumber = index + 1;
+              const isSelected = stepNumber === currentStep;
               return (
                 <div key={step.number} className="flex items-center gap-2 md:gap-3">
                   <NumberBadge

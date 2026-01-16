@@ -17,14 +17,12 @@ export default function SelectionConfirmedModal({ isOpen }: SelectionConfirmedMo
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-5">
       <div className="flex flex-col items-center gap-6 rounded-2xl bg-white px-12 py-10 shadow-xl">
         {/* 체크 아이콘 */}
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-100">
-          <Check className="h-10 w-10 text-accent-500" strokeWidth={3} />
+        <div className="bg-primary-50 flex h-20 w-20 items-center justify-center rounded-full">
+          <Check className="h-10 w-10 text-neutral-500" strokeWidth={3} />
         </div>
 
         {/* 메시지 */}
-        <p className="text-center text-title-m text-neutral-900">
-          확인완료요. 분석을 이어갈게요.
-        </p>
+        <p className="text-title-m text-center text-neutral-900">확인완료요. 분석을 이어갈게요.</p>
       </div>
     </div>
   );
