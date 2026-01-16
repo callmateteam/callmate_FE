@@ -9,6 +9,7 @@ import type { Utterance } from "@/lib/types/transcription";
 
 interface CallDetailsContentProps {
   utterances: Utterance[];
+  isLoading?: boolean;
 }
 
 /**

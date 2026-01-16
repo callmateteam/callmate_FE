@@ -36,7 +36,7 @@ export default function FeedbackContent({
     return (
       <div className="flex items-center justify-center py-20">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent-400 border-t-transparent" />
+          <div className="border-accent-400 h-10 w-10 animate-spin rounded-full border-4 border-t-transparent" />
           <p className="text-body-l text-neutral-400">응대 피드백 분석 중...</p>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function FeedbackContent({
         <p className="text-body-l text-center text-neutral-900">{error.message}</p>
         <button
           onClick={() => refetch()}
-          className="rounded-lg bg-accent-400 px-6 py-2 text-white transition-colors hover:bg-accent-500"
+          className="bg-accent-400 hover:bg-accent-500 rounded-lg px-6 py-2 text-white transition-colors"
         >
           다시 시도
         </button>
@@ -62,9 +62,7 @@ export default function FeedbackContent({
   if (!feedback) {
     return (
       <div className="flex flex-col items-center justify-center py-20">
-        <p className="text-body-l text-neutral-400">
-          응대 피드백 데이터가 없습니다.
-        </p>
+        <p className="text-body-l text-neutral-400">응대 피드백 데이터가 없습니다.</p>
       </div>
     );
   }
@@ -89,13 +87,11 @@ export default function FeedbackContent({
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-headline-s text-neutral-900">{item.title}</h4>
-                <span className="rounded-full bg-accent-100 px-3 py-1 text-label-s text-accent-700">
+                <span className="bg-accent-100 text-label-s text-accent-700 rounded-full px-3 py-1">
                   {getFeedbackTypeLabel(item.type)}
                 </span>
               </div>
-              <p className="text-body-m text-neutral-700 whitespace-pre-wrap">
-                {item.content}
-              </p>
+              <p className="text-body-m whitespace-pre-wrap text-neutral-700">{item.content}</p>
             </div>
           </AiSummaryBorder>
         ))}

@@ -11,6 +11,7 @@ import ProgressIndicatorCard from "@/components/common/ProgressIndicatorCard";
 import SearchInput from "@/components/common/SearchInput";
 import SegmentButton from "@/components/common/SegmentButton";
 import SttBox from "@/components/common/SttBox";
+import SurveyInput from "@/components/common/SurveyInput";
 import Toolbar from "@/components/common/Toolbar";
 import { Pen, Pencil } from "lucide-react";
 import Link from "next/link";
@@ -19,7 +20,7 @@ import React, { useState } from "react";
 export default function page() {
   const [selectedSegment, setSelectedSegment] = useState("option1");
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 p-10">
       <p className="">안녕하세요</p>
       {/* 버튼 */}
       <div className="flex gap-2">
@@ -97,6 +98,8 @@ export default function page() {
       <Chips text="text" />
       {/* toolbar */}
       <Toolbar />
+
+      {/* <SurveyInput /> */}
     </div>
   );
 }
