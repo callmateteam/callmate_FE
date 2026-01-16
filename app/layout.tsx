@@ -5,7 +5,16 @@ import Header from "@/components/layout/Header";
 import { organizationSchema, websiteSchema, softwareApplicationSchema } from "./schema";
 import { Providers } from "./providers";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://callmate-fe.vercel.app";
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "CallMate - AI 통화 보조 플랫폼 | 상담 기록 자동화",
     template: "%s | CallMate",
@@ -26,10 +35,13 @@ export const metadata: Metadata = {
     "콜메이트",
   ],
   authors: [{ name: "CallMate Team" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://callmate-fe.vercel.app",
+    url: SITE_URL,
     siteName: "CallMate",
     title: "CallMate - AI 통화 보조 플랫폼",
     description: "AI가 통화를 실시간으로 분석하고 상담 기록을 자동으로 작성합니다.",
